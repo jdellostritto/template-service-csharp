@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "template-service-csharp", "template-service-csharp\template-service-csharp.csproj", "{C90A6CD8-936C-4B2F-90A4-48EB44842131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-template-service-csharp", "test-template-service-csharp\test-template-service-csharp.csproj", "{0C100C1B-0C49-4010-ABC4-10A7DEB8C4D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C90A6CD8-936C-4B2F-90A4-48EB44842131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C90A6CD8-936C-4B2F-90A4-48EB44842131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C90A6CD8-936C-4B2F-90A4-48EB44842131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C90A6CD8-936C-4B2F-90A4-48EB44842131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C100C1B-0C49-4010-ABC4-10A7DEB8C4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C100C1B-0C49-4010-ABC4-10A7DEB8C4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C100C1B-0C49-4010-ABC4-10A7DEB8C4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C100C1B-0C49-4010-ABC4-10A7DEB8C4D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B93A5F46-3B29-4993-99A5-85F423869A46}
+	EndGlobalSection
+EndGlobal

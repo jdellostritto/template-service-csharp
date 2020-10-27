@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+  app:
+    environment:
+      - 'ASPNETCORE_ENVIRONMENT=Local'
+    restart: on-failure
+    ports:
+      - 8700:80
