@@ -64,7 +64,6 @@ namespace template_service_csharp {
 					c.RouteTemplate =
 						"test/api/{documentName}/greeting/swagger.json";
 				});
-
 				app.UseSwaggerUI (c => {
 					c.RoutePrefix = "test/api/1.0/greeting";
 					c.SwaggerEndpoint ("./swagger.json", "Greeting Service API");

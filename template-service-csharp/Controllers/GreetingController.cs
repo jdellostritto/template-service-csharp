@@ -1,14 +1,13 @@
-﻿using System.Net;
-using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.Extensions.Logging;
 using template_service_csharp.DTO;
 
-namespace template_service_csharp.Controllers {
-	[ApiController]
+namespace template_service_csharp.Controllers
+{
+    [ApiController]
 	[Route ("api/1.0/[controller]")]
 	public class GreetingController : ControllerBase {
 		

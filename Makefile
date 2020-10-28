@@ -27,6 +27,10 @@ image:
 
 test: 
 	docker build --target test -t $(TEST_IMAGE) .
+	docker create --name testcontainer $(TEST_IMAGE)
+	docker cp testcontainer:/testresults ./testresults
+	docker rm testcontainer
+	docker rmi -f $(TEST_IMAGE)
 
 run:
 	$(COMPOSE) $(LOCAL_CONFIG) up
