@@ -1,4 +1,12 @@
-.PHONY: publish clean build image test run stop remove
+.PHONY: publish clean build image test run stop remove kube-apply kube-delete
+
+#Kubernetes targets used in bash kubernetes manifests
+PROJECT ?= template-service-csharp
+REPO ?= acme.io
+ENVIRONMENT ?= Development
+BUILD ?= latest
+REPCOUNT ?= 1
+
 IMAGE ?= acme.io/template-service-csharp
 TEST_IMAGE ?= acme.io/test-template-service-csharp
 
@@ -39,5 +47,31 @@ stop:
 	$(COMPOSE) $(LOCAL_CONFIG) stop
 
 remove:
-	docker rmi -f $(IMAGE
+	docker rmi -f $(IMAGE)
+
+# Kubernetes via `Docker-Desktop` and `Minikube` Only supports Linux Containers.
+# These `make` targets will only run with linux container builds.
+# The Linux image must be available in the Minikube or Docker-Desktop Respository.
+# Before running these check for the image by running `docker images` command.
+# To switch to Minikube use the following command in powershell to switch the context
+# . to use minikube. To return to the docker-desktop kubernetes context close and reopen
+# . powershell and/or bash.
+
+# *NIX/Bash.
+kube-apply-bash:
+	REPO=$(REPO) ENVIRONMENT=$(ENVIRONMENT) BUILD=$(BUILD) REPCOUNT=$(REPCOUNT) PROJECT=$(PROJECT) envsubst < ./kubernetes/kubernetes.tmpl > ./kubernetes/$(PROJECT).yml
+	kubectl apply -f ./kubernetes/$(PROJECT).yml
 	
+kube-delete-bash:
+	kubectl delete -f ./kubernetes/$(PROJECT).yml
+	rm ./kubernetes/$(PROJECT).yml
+
+# Windows powershell run.
+# Need to run the .\kubernetes\envar.ps1 script to set the environment variables.
+kube-apply-ps:
+	envsubst < ./kubernetes/kubernetes.tmpl > ./kubernetes/$(PROJECT).yml
+	kubectl apply -f ./kubernetes/$(PROJECT).yml
+	
+kube-delete-ps:
+	kubectl delete -f ./kubernetes/$(PROJECT).yml
+	del .\kubernetes\$(PROJECT).yml

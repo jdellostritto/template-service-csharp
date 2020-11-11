@@ -1,26 +1,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: #{projectName}#
+  name: ${PROJECT}
   labels:
-    app: #{projectName}#
+    app: ${PROJECT}
 spec:
   ports:
   - port: 80
-    name: rest
-    targetPort: rest
+    protocol: TCP
+    targetPort: 80
   selector:
-    name: #{projectName}#
+    name: ${PROJECT}
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: #{projectName}#
+  name: ${PROJECT}
 spec:
-  replicas: #{replicaCount}#
+  replicas: ${REPCOUNT}
   selector:
     matchLabels:
-      name: #{projectName}#
+      name: ${PROJECT}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -30,7 +36,7 @@ spec:
   template:
     metadata:
       labels:
-        name: #{projectName}#
+        name: ${PROJECT}
     spec:
       affinity:
         podAntiAffinity:
@@ -40,11 +46,11 @@ spec:
                   - key: "name"
                     operator: In
                     values:
-                    - #{projectName}#
+                    - ${PROJECT}
               topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: #{projectName}#
-        image: #{acrServer}#/#{projectName}#:#{Build.BuildNumber}#
+      - name: ${PROJECT}
+        image: ${REPO}/${PROJECT}:${BUILD}
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -55,4 +61,4 @@ spec:
           name: rest
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: #{environment}#
+          value: ${ENVIRONMENT}
