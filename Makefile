@@ -1,11 +1,4 @@
-.PHONY: publish clean build image test run stop remove kube-apply kube-delete
-
-#Kubernetes targets used in bash kubernetes manifests
-PROJECT ?= template-service-csharp
-REPO ?= acme.io
-ENVIRONMENT ?= Development
-BUILD ?= latest
-REPCOUNT ?= 1
+.PHONY: publish clean build image test run stop remove kube-apply-bash kube-delete-bash kube-apply-ps kube-delete-ps
 
 IMAGE ?= acme.io/template-service-csharp
 TEST_IMAGE ?= acme.io/test-template-service-csharp
@@ -59,7 +52,7 @@ remove:
 
 # *NIX/Bash.
 kube-apply-bash:
-	REPO=$(REPO) ENVIRONMENT=$(ENVIRONMENT) BUILD=$(BUILD) REPCOUNT=$(REPCOUNT) PROJECT=$(PROJECT) envsubst < ./kubernetes/kubernetes.tmpl > ./kubernetes/$(PROJECT).yml
+	envsubst < ./kubernetes/kubernetes.tmpl > ./kubernetes/$(PROJECT).yml
 	kubectl apply -f ./kubernetes/$(PROJECT).yml
 	
 kube-delete-bash:
