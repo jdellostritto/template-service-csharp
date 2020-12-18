@@ -1,4 +1,4 @@
-.PHONY: publish clean build image test run stop remove kube-apply-bash kube-delete-bash kube-apply-ps kube-delete-ps
+.PHONY: publish clean build image test run stop remove kube-apply-bash kube-delete-bash kube-apply-ps kube-delete-ps scan
 
 IMAGE ?= acme.io/template-service-csharp
 TEST_IMAGE ?= acme.io/test-template-service-csharp

@@ -1,12 +1,12 @@
-# NIX 
+# LINUX 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS base
-# Win FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+# WINDOWS FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
 
-# NIX 
+#LINIX 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine as build
-# Win FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+#WINDOWS FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
 WORKDIR /src
 COPY ./*.sln .
 COPY ./template-service-csharp/*.csproj template-service-csharp/
@@ -31,13 +31,13 @@ RUN dotnet tool install dotnet-reportgenerator-globaltool --version 4.7.1 --tool
 RUN dotnet test --results-directory /testresults --logger "trx;LogFileName=test_results.xml" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=/testresults/coverage/
 # generate html reports 
 
-# *NIX 
+# LINUX 
 RUN /tools/reportgenerator "-reports:/testresults/coverage/coverage.cobertura.xml" "-targetdir:/testresults/coverage/reports" "-reporttypes:HTMLInline;HTMLChart"
 RUN ls -la /testresults/coverage/reports
 
-# WIN
-#RUN /tools/reportgenerator "-reports:\testresults\coverage\coverage.cobertura.xml" "-targetdir:\testresults\coverage\reports" "-reporttypes:HTMLInline;HTMLChart"
-#RUN dir /b/a:-h \testresults\coverage\reports
+# WINDOWS
+# RUN /tools/reportgenerator "-reports:\testresults\coverage\coverage.cobertura.xml" "-targetdir:\testresults\coverage\reports" "-reporttypes:HTMLInline;HTMLChart"
+# RUN dir /b/a:-h \testresults\coverage\reports
 
 # Build runtime image
 FROM base AS final
